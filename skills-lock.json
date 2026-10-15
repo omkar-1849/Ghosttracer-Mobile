@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "ui-ux": {
+      "source": "notmehul/skills",
+      "sourceType": "github",
+      "skillPath": "skills/ui-ux/SKILL.md",
+      "computedHash": "769c10ca4a2efe66caa6d57eb3a7a7028c82a2d1975ea56fd5b1b92ff69a31c2"
+    }
+  }
+}

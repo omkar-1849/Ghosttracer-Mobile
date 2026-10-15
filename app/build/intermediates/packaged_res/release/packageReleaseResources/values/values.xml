@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#0B0F17</color>
+    <string name="app_name">Sentinel Mobile</string>
+    <string name="channel_critical_desc">Immediate alerts for confirmed security breaches, severe SQLi/RCE exploits, and critical system anomalies.</string>
+    <string name="channel_critical_name">Critical Security Threats</string>
+    <string name="channel_high_desc">Notifications for suspicious authentication surges, policy violations, and high-risk security findings.</string>
+    <string name="channel_high_name">High Priority Alerts</string>
+    <style name="Theme.SentinelMobile" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">#0B0F17</item>
+        <item name="android:navigationBarColor">#0B0F17</item>
+        <item name="android:windowBackground">#0B0F17</item>
+    </style>
+</resources>
