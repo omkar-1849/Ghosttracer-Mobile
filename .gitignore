@@ -1,19 +1,60 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-build/
-**/build/
-.gradle/
-**/.gradle/
+# ==============================================================================
+# Sentinel Mobile - .gitignore
+# ==============================================================================
+
+# Built packages & binaries
 *.apk
 *.aab
+*.dex
+*.ap_
+
+# Keystore & Signing secrets
 *.keystore
-!debug.keystore
-google-services.json
+*.jks
 secrets.properties
+google-services.json
+
+# Environment variables & secrets (CRITICAL: NEVER COMMIT)
+.env
+.env.*
+!.env.example
+*.env
+
+# Local machine Android SDK & Build configuration
+local.properties
+.gradle/
+**/build/
+build/
+*.iml
+.idea/
+.kotlin/
+.externalNativeBuild/
+.cxx/
+/captures/
+
+# IDE & Editor files
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Python & Testing artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+venv/
+.venv/
+env/
+
+# Logs & temp files
+*.log
+logs/
+temp/
+tmp/
+
+# Antigravity agent files
+.agents/
+skills-lock.json

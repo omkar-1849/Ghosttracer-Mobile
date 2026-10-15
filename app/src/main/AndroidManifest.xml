@@ -44,6 +44,15 @@
             </intent-filter>
         </service>
 
+        <!-- Test and local alert broadcast receiver -->
+        <receiver
+            android:name=".service.TestAlertBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ai.sentinel.mobile.TRIGGER_ALERT_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

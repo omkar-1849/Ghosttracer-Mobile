@@ -12,16 +12,22 @@ sealed class Screen(val route: String) {
     object Main : Screen("main")
 }
 
-sealed class BottomNavTab(
+enum class BottomNavTab(
     val route: String,
-    val title: String,
-    val icon: ImageVector
+    val title: String
 ) {
-    object Alerts : BottomNavTab("alerts_tab", "Threat Alerts", Icons.Default.Shield)
-    object Logs : BottomNavTab("logs_tab", "Event Logs", Icons.Default.ReceiptLong)
-    object Settings : BottomNavTab("settings_tab", "Settings", Icons.Default.Settings)
+    Alerts("alerts_tab", "Threat Alerts"),
+    Logs("logs_tab", "Event Logs"),
+    Settings("settings_tab", "Settings");
+
+    val icon: ImageVector
+        get() = when (this) {
+            Alerts -> Icons.Default.Shield
+            Logs -> Icons.Default.ReceiptLong
+            Settings -> Icons.Default.Settings
+        }
 
     companion object {
-        val items = listOf(Alerts, Logs, Settings)
+        val items: List<BottomNavTab> get() = entries
     }
 }

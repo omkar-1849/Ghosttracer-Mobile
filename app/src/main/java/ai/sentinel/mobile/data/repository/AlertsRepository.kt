@@ -1,16 +1,22 @@
 package ai.sentinel.mobile.data.repository
 
+import android.content.Context
 import ai.sentinel.mobile.data.local.SessionManager
 import ai.sentinel.mobile.data.model.AlertDto
+import ai.sentinel.mobile.data.model.Severity
 import ai.sentinel.mobile.data.remote.SentinelApiService
+import ai.sentinel.mobile.service.NotificationHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class AlertsRepository(
     private val apiService: SentinelApiService,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    private val context: Context? = null
 ) {
+
+    private var highestSeenAlertId: Int? = null
 
     private val _alertsFlow = MutableStateFlow<List<AlertDto>>(emptyList())
     val alertsFlow: StateFlow<List<AlertDto>> = _alertsFlow.asStateFlow()
@@ -28,6 +34,27 @@ class AlertsRepository(
                 val alerts = response.body()!!
                 // Deduplicate by ID and sort descending
                 val deduplicated = alerts.distinctBy { it.id }.sortedByDescending { it.id }
+
+                val maxId = deduplicated.maxOfOrNull { it.id }
+                if (highestSeenAlertId != null && maxId != null && maxId > highestSeenAlertId!!) {
+                    val newAlerts = deduplicated.filter { it.id > highestSeenAlertId!! }
+                    context?.let { ctx ->
+                        for (newAlert in newAlerts) {
+                            if (newAlert.severity == Severity.CRITICAL || newAlert.severity == Severity.HIGH) {
+                                NotificationHelper.showThreatNotification(
+                                    context = ctx,
+                                    alertId = newAlert.id,
+                                    severity = newAlert.severity,
+                                    summary = newAlert.message
+                                )
+                            }
+                        }
+                    }
+                }
+                if (maxId != null) {
+                    highestSeenAlertId = maxOf(highestSeenAlertId ?: 0, maxId)
+                }
+
                 _alertsFlow.value = deduplicated
                 _lastUpdatedFlow.value = System.currentTimeMillis()
                 _isStaleFlow.value = false
@@ -44,12 +71,10 @@ class AlertsRepository(
 
     suspend fun getAlertDetail(alertId: Int): Result<AlertDto> {
         return try {
-            // First try remote single-alert endpoint
             val response = apiService.getAlertDetail(alertId)
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
             } else {
-                // Fallback to cached alert if available
                 val cached = _alertsFlow.value.find { it.id == alertId }
                 if (cached != null) {
                     Result.success(cached)

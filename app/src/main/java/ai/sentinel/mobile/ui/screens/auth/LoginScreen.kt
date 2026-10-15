@@ -78,8 +78,8 @@ fun LoginScreen(
     onLoginClick: (String, String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var email by remember { mutableStateOf("admin@sentinel.ai") }
-    var password by remember { mutableStateOf("AuditSecPass123!#") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var showServerDialog by remember { mutableStateOf(false) }
     var serverUrlInput by remember { mutableStateOf(sessionManager.serverBaseUrl) }

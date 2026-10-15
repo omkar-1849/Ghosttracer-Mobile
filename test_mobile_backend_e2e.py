@@ -9,14 +9,31 @@ Validates the full API contract implemented in Sentinel Mobile:
 6. Security Logs Queue (GET /logs/recent)
 7. Mobile Device Registration Contract (POST /mobile/devices/register degraded mode verification)
 """
+import os
 import sys
 import unittest
 from pathlib import Path
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
-# Add backend directory to sys.path
-backend_path = Path(r"C:\Users\omkar\OneDrive\Desktop\Games\c  program\new\backend")
-sys.path.insert(0, str(backend_path))
-sys.path.insert(0, str(backend_path.parent))
+# Add Sentinel backend directory to sys.path
+backend_path_str = os.getenv(
+    "SENTINEL_BACKEND_PATH",
+    r"C:\Users\omkar\OneDrive\Desktop\Games\c  program\new\backend"
+)
+backend_path = Path(backend_path_str)
+if backend_path.exists():
+    sys.path.insert(0, str(backend_path))
+    sys.path.insert(0, str(backend_path.parent))
+else:
+    # Try adjacent backend folder
+    alt_path = Path(__file__).resolve().parent.parent / "backend"
+    if alt_path.exists():
+        sys.path.insert(0, str(alt_path))
+        sys.path.insert(0, str(alt_path.parent))
 
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine

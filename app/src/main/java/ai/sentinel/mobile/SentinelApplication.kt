@@ -41,7 +41,7 @@ class SentinelApplication : Application() {
 
         // 3. Initialize repositories
         authRepository = AuthRepository(apiClient.apiService, sessionManager)
-        alertsRepository = AlertsRepository(apiClient.apiService, sessionManager)
+        alertsRepository = AlertsRepository(apiClient.apiService, sessionManager, this)
         logsRepository = LogsRepository(apiClient.apiService, sessionManager)
         deviceRepository = DeviceRepository(apiClient.apiService, sessionManager)
 
