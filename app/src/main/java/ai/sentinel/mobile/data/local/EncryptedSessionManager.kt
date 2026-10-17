@@ -146,7 +146,7 @@ class EncryptedSessionManager(context: Context) : SessionManager {
     }
 
     companion object {
-        const val DEFAULT_BASE_URL = "http://10.0.2.2:8000/"
+        const val DEFAULT_BASE_URL = "http://127.0.0.1:8000/"
         private const val KEY_ACCESS_TOKEN = "sec_access_token"
         private const val KEY_USER_ID = "sec_user_id"
         private const val KEY_USER_EMAIL = "sec_user_email"

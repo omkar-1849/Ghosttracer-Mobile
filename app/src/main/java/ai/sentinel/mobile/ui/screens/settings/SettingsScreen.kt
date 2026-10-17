@@ -3,6 +3,7 @@ package ai.sentinel.mobile.ui.screens.settings
 import android.content.Intent
 import android.os.Build
 import android.provider.Settings
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +20,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import ai.sentinel.mobile.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Business
 import androidx.compose.material.icons.filled.CheckCircle
@@ -131,10 +135,10 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             // 2. Server API Endpoint Configuration
-            SectionHeader("SENTINEL BACKEND ENDPOINT")
+            SectionHeader("GHOST-TRACER BACKEND ENDPOINT")
             CardSection {
                 Text(
-                    text = "Configure the Sentinel REST API target. Changes take effect on subsequent network calls.",
+                    text = "Configure the Ghost-Tracer REST API target. Changes take effect on subsequent network calls.",
                     style = MaterialTheme.typography.bodySmall,
                     color = TextSecondary
                 )
@@ -241,9 +245,38 @@ fun SettingsScreen(
                 )
             }
 
+            // 5. About & Platform Identity
+            SectionHeader("PRODUCT IDENTITY")
+            CardSection {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ghost_tracer_mark),
+                        contentDescription = "Ghost-Tracer",
+                        modifier = Modifier.size(36.dp),
+                        contentScale = ContentScale.Fit
+                    )
+                    Column {
+                        Text(
+                            text = "GHOST-TRACER MOBILE",
+                            style = MaterialTheme.typography.titleSmall,
+                            color = TextPrimary
+                        )
+                        Text(
+                            text = "Version 1.0.0 • Field Operations Companion",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = TextSecondary
+                        )
+                    }
+                }
+            }
+
             Spacer(modifier = Modifier.height(28.dp))
 
-            // 5. Logout Button
+            // 6. Logout Button
             Button(
                 onClick = onLogoutClick,
                 colors = ButtonDefaults.buttonColors(containerColor = CriticalCrimson),

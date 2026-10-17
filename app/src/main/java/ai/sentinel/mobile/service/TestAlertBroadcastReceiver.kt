@@ -10,7 +10,7 @@ class TestAlertBroadcastReceiver : BroadcastReceiver() {
         val alertId = intent.getIntExtra("alert_id", 134)
         val severityStr = intent.getStringExtra("severity") ?: "HIGH"
         val severity = Severity.fromString(severityStr)
-        val summary = intent.getStringExtra("summary") ?: "Threat alert detected by Sentinel Platform."
+        val summary = intent.getStringExtra("summary") ?: "Threat alert detected by Ghost-Tracer Platform."
 
         NotificationHelper.showThreatNotification(
             context = context,

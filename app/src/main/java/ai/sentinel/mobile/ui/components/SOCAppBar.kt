@@ -1,5 +1,6 @@
 package ai.sentinel.mobile.ui.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -29,9 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import ai.sentinel.mobile.R
 import ai.sentinel.mobile.ui.theme.AmberHighlight
 import ai.sentinel.mobile.ui.theme.CardElevation1
 import ai.sentinel.mobile.ui.theme.CardElevation2
@@ -71,11 +75,11 @@ fun SOCAppBar(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Security,
-                    contentDescription = "Sentinel Shield",
-                    tint = ElectricBlue,
-                    modifier = Modifier.size(24.dp)
+                Image(
+                    painter = painterResource(id = R.drawable.ghost_tracer_mark),
+                    contentDescription = "Ghost-Tracer",
+                    modifier = Modifier.size(24.dp),
+                    contentScale = ContentScale.Fit
                 )
                 Text(
                     text = title,

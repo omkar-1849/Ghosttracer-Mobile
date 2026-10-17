@@ -11,14 +11,14 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = ElectricBlue,
+    primary = EmberBright,
     onPrimary = TextPrimary,
     primaryContainer = CardElevation2,
     onPrimaryContainer = TextPrimary,
-    secondary = BronzeAccent,
+    secondary = EmberCore,
     onSecondary = TextPrimary,
     secondaryContainer = CardElevation1,
-    onSecondaryContainer = AmberHighlight,
+    onSecondaryContainer = FlameAccent,
     tertiary = AmberHighlight,
     background = DeepObsidian,
     onBackground = TextPrimary,

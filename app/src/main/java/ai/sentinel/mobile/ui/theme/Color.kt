@@ -2,16 +2,23 @@ package ai.sentinel.mobile.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Obsidian Base Surfaces
-val DeepObsidian = Color(0xFF0B0F17)
-val CardElevation1 = Color(0xFF131B26)
-val CardElevation2 = Color(0xFF1B2636)
-val SurfaceBorder = Color(0xFF26354A)
+// Obsidian Base Surfaces (Deep Black / Graphite)
+val DeepObsidian = Color(0xFF07090E)
+val CardElevation1 = Color(0xFF10141D)
+val CardElevation2 = Color(0xFF171D2A)
+val SurfaceBorder = Color(0xFF232B3B)
 
-// Brand Core
-val CobaltCore = Color(0xFF2563EB)
-val ElectricBlue = Color(0xFF3B82F6)
-val ElectricBlueVariant = Color(0xFF1D4ED8)
+// Ghost-Tracer Ember & Fire Core (Derived from authoritative mark)
+val EmberCore = Color(0xFFE87243)
+val EmberBright = Color(0xFFF97316)
+val EmberGaze = Color(0xFFEA580C)
+val FlameAccent = Color(0xFFFF8A50)
+val GhostDark = Color(0xFF11151F)
+
+// Legacy alias mappings for backwards compatibility in existing screens
+val CobaltCore = EmberCore
+val ElectricBlue = EmberBright
+val ElectricBlueVariant = EmberGaze
 
 // Bronze & Amber Accents
 val BronzeAccent = Color(0xFFD97706)

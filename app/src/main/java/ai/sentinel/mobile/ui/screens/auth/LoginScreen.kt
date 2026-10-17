@@ -1,5 +1,6 @@
 package ai.sentinel.mobile.ui.screens.auth
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -47,7 +48,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -56,6 +59,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ai.sentinel.mobile.R
 import ai.sentinel.mobile.data.local.EncryptedSessionManager
 import ai.sentinel.mobile.ui.theme.AmberHighlight
 import ai.sentinel.mobile.ui.theme.CardElevation1
@@ -82,6 +86,7 @@ fun LoginScreen(
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var showServerDialog by remember { mutableStateOf(false) }
+    var currentBaseUrl by remember { mutableStateOf(sessionManager.serverBaseUrl) }
     var serverUrlInput by remember { mutableStateOf(sessionManager.serverBaseUrl) }
 
     val focusManager = LocalFocusManager.current
@@ -92,7 +97,7 @@ fun LoginScreen(
             onDismissRequest = { showServerDialog = false },
             title = {
                 Text(
-                    text = "Sentinel Backend Endpoint",
+                    text = "Ghost-Tracer Backend Endpoint",
                     style = MaterialTheme.typography.titleMedium,
                     color = TextPrimary
                 )
@@ -100,7 +105,7 @@ fun LoginScreen(
             text = {
                 Column {
                     Text(
-                        text = "Set the Sentinel REST API base URL. Use 10.0.2.2 for Android Emulator, or your host machine's IP for physical devices.",
+                        text = "Set the Ghost-Tracer REST API base URL. Use 10.0.2.2 for Android Emulator, or your host machine's IP for physical devices.",
                         style = MaterialTheme.typography.bodySmall,
                         color = TextSecondary
                     )
@@ -125,6 +130,7 @@ fun LoginScreen(
                 Button(
                     onClick = {
                         sessionManager.serverBaseUrl = serverUrlInput
+                        currentBaseUrl = sessionManager.serverBaseUrl
                         showServerDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = CobaltCore)
@@ -154,22 +160,17 @@ fun LoginScreen(
                 .verticalScroll(scrollState)
                 .padding(24.dp)
         ) {
-            // Shield Icon & Brand
-            Icon(
-                imageVector = Icons.Default.Security,
-                contentDescription = "Sentinel Shield",
-                tint = ElectricBlue,
-                modifier = Modifier.size(64.dp)
+            // Authoritative Ghost-Tracer Horizontal Brand Asset
+            Image(
+                painter = painterResource(id = R.drawable.ghost_tracer_horizontal),
+                contentDescription = "GHOST-TRACER",
+                modifier = Modifier
+                    .fillMaxWidth(0.85f)
+                    .height(64.dp),
+                contentScale = ContentScale.Fit
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
-
-            Text(
-                text = "SENTINEL MOBILE",
-                style = MaterialTheme.typography.headlineMedium,
-                color = TextPrimary,
-                letterSpacing = 2.sp
-            )
+            Spacer(modifier = Modifier.height(8.dp))
 
             Text(
                 text = "Security Operations Center • Field Companion",
@@ -197,7 +198,7 @@ fun LoginScreen(
                     modifier = Modifier.size(12.dp)
                 )
                 Text(
-                    text = sessionManager.serverBaseUrl,
+                    text = currentBaseUrl,
                     style = MaterialTheme.typography.labelSmall.copy(fontFamily = FontFamily.Monospace),
                     color = TextSecondary
                 )

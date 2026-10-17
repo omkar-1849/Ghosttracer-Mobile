@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sentinel Mobile</string>
+    <string name="app_name">GHOST-TRACER</string>
     <string name="channel_critical_name">Critical Security Threats</string>
     <string name="channel_critical_desc">Immediate alerts for confirmed security breaches, severe SQLi/RCE exploits, and critical system anomalies.</string>
     <string name="channel_high_name">High Priority Alerts</string>

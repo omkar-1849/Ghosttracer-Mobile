@@ -88,13 +88,14 @@ object NotificationHelper {
         val title = when (severity) {
             Severity.CRITICAL -> "CRITICAL THREAT ALERT #$alertId"
             Severity.HIGH -> "HIGH PRIORITY ALERT #$alertId"
-            else -> "SECURITY THREAT ADVISORY #$alertId"
+            else -> "GHOST-TRACER THREAT ADVISORY #$alertId"
         }
 
         val bodyText = summary ?: "High-risk threat detected. Tap to inspect forensic telemetry."
 
         val notification = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.ic_sentinel_shield)
+            .setSmallIcon(R.drawable.ic_notification_ghost)
+            .setColor(0xFFE87243.toInt())
             .setContentTitle(title)
             .setContentText(bodyText)
             .setStyle(NotificationCompat.BigTextStyle().bigText(bodyText))
